@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squadly | سكوادلي - منصة المهارات والموديريتورز المعتمدين</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0B0F19;
+            --card-bg: #151C2C;
+            --card-border: #232D42;
+            --primary: #6366F1;
+            --primary-glow: #818CF8;
+            --accent-purple: #A855F7;
+            --accent-green: #10B981;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        header {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--card-border);
+            padding: 1rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, #818CF8, #A855F7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--text-main); }
+
+        .auth-btns {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.4rem;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: 0.3s;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--card-border);
+        }
+
+        .btn-outline:hover { background: var(--card-border); }
+
+        .btn-glow {
+            background: linear-gradient(135deg, var(--primary), var(--accent-purple));
+            color: #fff;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+        }
+
+        .btn-glow:hover {
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.7);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 8%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text h1 span {
+            color: var(--accent-purple);
+        }
+
+        .hero-text p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .features-list li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-main);
+        }
+
+        .hero-card-preview {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .hero-card-preview::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, var(--primary), var(--accent-purple));
+            border-radius: 18px;
+            z-index: -1;
+            opacity: 0.3;
+            filter: blur(10px);
+        }
+
+        /* Services Grid */
+        .categories {
+            padding: 3rem 8%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .cat-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .cat-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Verified Freelancers Section */
+        .section-padding { padding: 4rem 8%; }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .freelancers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .user-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .user-card:hover { border-color: var(--accent-purple); }
+
+        .user-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #334155;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .badge-verified {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Modal / Popups (Login / Register / Verification) */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            width: 100%;
+            max-width: 450px;
+            padding: 2.5rem;
+            border-radius: 16px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem; left: 1rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--bg-dark);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: #fff;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+        }
+
+        .tab-btns {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 0.8rem;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .tab-btn.active {
+            color: var(--accent-purple);
+            border-bottom: 2px solid var(--accent-purple);
+        }
+
+        @media (max-width: 768px) {
+            .hero { grid-template-columns: 1fr; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">⚡ Squadly</div>
+        <nav>
+            <ul>
+                <li><a href="#">الرئيسية</a></li>
+                <li><a href="#">الموديريتورز</a></li>
+                <li><a href="#">المستقلين</a></li>
+                <li><a href="#">نظام الضمان (Escrow)</a></li>
+            </ul>
+        </nav>
+        <div class="auth-btns">
+            <button class="btn btn-outline" onclick="openModal('login')">تسجيل الدخول</button>
+            <button class="btn btn-glow" onclick="openModal('register')">حساب جديد</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>سوادلي: فريقك الرقمي الموثوق. <span>ودع النصب.</span></h1>
+            <p>منصة تجمع أفضل الموديريتورز والمستقلين المعتمدين تحت نظام شركة يحمي أرباحك وأموالك بالكامل.</p>
+            <ul class="features-list">
+                <li>✔ موديريتورز معتمدون ومفحوصون</li>
+                <li>✔ ضمان مالي كامل (نظام حجز الأموال)</li>
+                <li>✔ إشراف وجودة مضمونة باستبدال فوري</li>
+            </ul>
+            <button class="btn btn-glow" onclick="openModal('verify')">طلب توثيق حسابك كـ موديريتور</button>
+        </div>
+        <div class="hero-card-preview">
+            <h3>🛡️ نظام الوساطة والضمان (Escrow)</h3>
+            <p style="color: var(--text-muted); margin: 1rem 0;">العميل يدفع للمنصة ➔ يتم تنفيذ العمل ➔ المنصة تراجع الجودة ➔ المستقل يستلم أمواله <b>(75%)</b> والمنصة عمولتها <b>(25%)</b>.</p>
+            <div style="background: var(--bg-dark); padding: 1rem; border-radius: 8px; border: 1px solid var(--card-border);">
+                <small style="color: var(--accent-green);">● الحالة: عملية مؤمنة 100%</small>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <div class="categories">
+        <div class="cat-card">
+            <div class="cat-icon">🎧</div>
+            <h4>خدمة العملاء</h4>
+        </div>
+        <div class="cat-card">
+            <div class="cat-icon">✍️</div>
+            <h4>إدارة المحتوى</h4>
+        </div>
+        <div class="cat-card">
+            <div class="cat-icon">🎨</div>
+            <h4>التصميم</h4>
+        </div>
+        <div class="cat-card">
+            <div class="cat-icon">💻</div>
+            <h4>البرمجة</h4>
+        </div>
+    </div>
+
+    <!-- Verified Freelancers Section -->
+    <section class="section-padding">
+        <div class="section-title">
+            <h2>موديريتورز موثوقين (Verified)</h2>
+            <button class="btn btn-outline" onclick="openModal('register')">انضم للفريق</button>
+        </div>
+        <div class="freelancers-grid">
+            <!-- Card 1 -->
+            <div class="user-card">
+                <div class="user-header">
+                    <div class="avatar">ع خ</div>
+                    <div>
+                        <h4>عمر خالد</h4>
+                        <small style="color: var(--text-muted);">دعم فني وتنظيم أوردرات</small>
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="badge-verified">✓ Verified</span>
+                    <span style="color: #FBBF24;">★ 4.9</span>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="user-card">
+                <div class="user-header">
+                    <div class="avatar">س أ</div>
+                    <div>
+                        <h4>سارة أحمد</h4>
+                        <small style="color: var(--text-muted);">إدارة ردود وصفحات</small>
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="badge-verified">✓ Verified</span>
+                    <span style="color: #FBBF24;">★ 4.8</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Unified Modal System (Auth & Verification) -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            
+            <div class="tab-btns">
+                <button class="tab-btn" id="loginTab" onclick="switchTab('login')">تسجيل الدخول</button>
+                <button class="tab-btn" id="registerTab" onclick="switchTab('register')">حساب جديد</button>
+                <button class="tab-btn" id="verifyTab" onclick="switchTab('verify')">التوثيق</button>
+            </div>
+
+            <!-- Form: Login -->
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" placeholder="name@domain.com" required>
+                </div>
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-glow" style="width: 100%;">دخول</button>
+            </form>
+
+            <!-- Form: Register -->
+            <form id="registerForm" style="display: none;">
+                <div class="form-group">
+                    <label>الاسم بالكامل</label>
+                    <input type="text" placeholder="محمد أحمد" required>
+                </div>
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" placeholder="name@domain.com" required>
+                </div>
+                <div class="form-group">
+                    <label>نوع الحساب</label>
+                    <select>
+                        <option>صاحب مشروع / عميل</option>
+                        <option>موديريتور / مستقل (75% أرباح)</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-glow" style="width: 100%;">إنشاء حساب</button>
+            </form>
+
+            <!-- Form: Account Verification -->
+            <form id="verifyForm" style="display: none;">
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">قدم طلب الحصول على شارة Verified للبدء في استلام شفتات الشغل.</p>
+                <div class="form-group">
+                    <label>رابط معرض الأعمال / البروفايل</label>
+                    <input type="url" placeholder="https://..." required>
+                </div>
+                <div class="form-group">
+                    <label>سنوات الخبرة في الموديريشن</label>
+                    <input type="number" placeholder="مثال: 2" required>
+                </div>
+                <div class="form-group">
+                    <label>رفع صورة الهوية (لتأكيد عدم النصب)</label>
+                    <input type="file" style="padding: 0.4rem;" required>
+                </div>
+                <button type="submit" class="btn btn-glow" style="width: 100%;">إرسال طلب التوثيق</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal(tab) {
+            document.getElementById('authModal').style.display = 'flex';
+            switchTab(tab);
+        }
+
+        function closeModal() {
+            document.getElementById('authModal').style.display = 'none';
+        }
+
+        function switchTab(tab) {
+            // Reset Active Styles
+            document.getElementById('loginTab').classList.remove('active');
+            document.getElementById('registerTab').classList.remove('active');
+            document.getElementById('verifyTab').classList.remove('active');
+
+            // Hide Forms
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('verifyForm').style.display = 'none';
+
+            // Show Selected
+            if(tab === 'login') {
+                document.getElementById('loginTab').classList.add('active');
+                document.getElementById('loginForm').style.display = 'block';
+            } else if(tab === 'register') {
+                document.getElementById('registerTab').classList.add('active');
+                document.getElementById('registerForm').style.display = 'block';
+            } else if(tab === 'verify') {
+                document.getElementById('verifyTab').classList.add('active');
+                document.getElementById('verifyForm').style.display = 'block';
+            }
+        }
+
+        // Close Modal when clicking outside content
+        window.onclick = function(event) {
+            let modal = document.getElementById('authModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
